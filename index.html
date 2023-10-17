@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Daily Run Rate</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading">DRR Report</h1>
+        <div class="inputs">
+            <div class="first input">
+                <label>Start Date:</label>
+                <input type="date" id="start-date">
+                <label>End Date:</label>
+                <input type="date" id="end-date" onchange="validateEndDate()">
+                <label>Month/Year:</label>
+                <input type="text" class="month-input" onclick="fillMonthYear(this)" readonly placeholder="Click here">
+            </div>
+            <div class="second input">
+                <label>Excluded Dates:</label>
+                <input type="date" id="excluded-date" disabled>
+                <label>Number of Days:</label>
+                <input type="text" class="days-input" onclick="fillDaysInput(this)" readonly>
+            </div>
+            <div class="third input">
+                <label>Lead Count:</label>
+                <input type="number" id="lead-count" placeholder="Enter lead count value">
+                <label>Expected Lead Count:</label>
+                <input type="text" class="expected-lead-count-input" onclick="fillExpectedLeadCountInput(this)" readonly
+                    placeholder="Click here">
+            </div>
+            <div class="fourth input">
+                <button id="add-row-button" onclick="saveData(this)">Save</button>
+                <button id="cancel" onclick="cancel(this)">Cancel</button>
+            </div>
+        </div>
+        <div class="drr-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Month/Year</th>
+                        <th>Dates Excluded</th>
+                        <th>Number of Days</th>
+                        <th>Lead Count</th>
+                        <th>Expected Lead Count</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
