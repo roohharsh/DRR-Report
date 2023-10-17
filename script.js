@@ -153,6 +153,28 @@ function saveData() {
             input.value = '';
         }
     });
+
+    // Save the table data to localStorage
+    saveDataToLocalStorage();
+}
+
+// Function to save the table data to localStorage
+function saveDataToLocalStorage() {
+    const tableRows = document.querySelectorAll("table tbody tr");
+    const savedData = [];
+
+    tableRows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        const rowData = [];
+
+        cells.forEach((cell) => {
+            rowData.push(cell.textContent);
+        });
+
+        savedData.push(rowData);
+    });
+
+    localStorage.setItem("tableData", JSON.stringify(savedData));
 }
 
 // Function to clear input fields when "Cancel" button is clicked
@@ -164,6 +186,27 @@ function cancel() {
         }
     })
 }
+
+// Function to load saved data from localStorage and populate the table
+function loadSavedData() {
+    const table = document.querySelector("table tbody");
+    const savedData = JSON.parse(localStorage.getItem("tableData"));
+
+    if (savedData) {
+        savedData.forEach((rowData) => {
+            const newRow = document.createElement("tr");
+            rowData.forEach((cellData) => {
+                const cell = document.createElement("td");
+                cell.textContent = cellData;
+                newRow.appendChild(cell);
+            });
+            table.appendChild(newRow);
+        });
+    }
+}
+
+// Call the function to load saved data when the page loads
+window.addEventListener("load", loadSavedData);
 
 // Add event listeners to your input fields
 document.querySelector(".month-input").addEventListener("click", function () {

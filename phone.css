@@ -1,0 +1,39 @@
+@media (max-width: 900px) {
+    .heading{
+        margin: 20px;
+    }
+
+    .input{
+        flex-direction: column;
+        margin-bottom: 0px;
+        font-size: 0.9rem;
+    }
+
+    .inputs{
+        width: 87%;
+        padding: 15px;
+    }
+
+    input{
+        width: 150px;
+        padding: 2px;
+        margin-left: 5px;
+        font-size: 0.9rem;
+    }
+
+    .phone{
+        margin-bottom: 20px;
+    }
+
+    .fourth{
+        flex-direction: row;
+    }
+
+    button{
+        font-size: 0.9rem;
+    }
+
+    .drr-table{
+        font-size: 0.6rem;
+    }
+}
