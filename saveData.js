@@ -11,7 +11,7 @@ function saveData() {
     const newRow = document.createElement("tr");
 
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.addEventListener("click", function () {
         deleteRow(this);
     });
@@ -64,18 +64,18 @@ function saveData() {
     saveDataToLocalStorage();
 }
 
-
-
-
 // Function to delete a row
 function deleteRow(button) {
     const row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
 
+    // Update the currentId and save it to localStorage
+    currentId--;
+    localStorage.setItem("currentId", currentId);
+
     // Save the table data to localStorage after deleting a row
     saveDataToLocalStorage();
 }
-
 
 // Function to save the table data to localStorage
 function saveDataToLocalStorage() {
@@ -96,7 +96,6 @@ function saveDataToLocalStorage() {
     localStorage.setItem("tableData", JSON.stringify(savedData));
 }
 
-
 // Function to clear input fields when "Cancel" button is clicked
 function cancel() {
     const inputs = document.querySelectorAll("input");
@@ -107,7 +106,6 @@ function cancel() {
     })
 }
 
-
 // Function to load saved data from localStorage and populate the table
 function loadSavedData() {
     const table = document.querySelector("table tbody");
@@ -116,16 +114,24 @@ function loadSavedData() {
     if (savedData) {
         savedData.forEach((rowData) => {
             const newRow = document.createElement("tr");
-            rowData.forEach((cellData) => {
+            rowData.forEach((cellData, index) => {
                 const cell = document.createElement("td");
-                cell.textContent = cellData;
+                if (index === 0) { // Check if it's the first cell (Delete button)
+                    const deleteButton = document.createElement("button");
+                    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteButton.addEventListener("click", function () {
+                        deleteRow(this);
+                    });
+                    cell.appendChild(deleteButton);
+                } else {
+                    cell.textContent = cellData;
+                }
                 newRow.appendChild(cell);
             });
             table.appendChild(newRow);
         });
     }
 }
-
 
 // Call the function to load saved data when the page loads
 window.addEventListener("load", loadSavedData);

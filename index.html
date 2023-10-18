@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="phone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
@@ -33,12 +34,12 @@
             <div class="second input">
                 <div class="phone">
                     <label>Excluded Dates:</label>
-                    <input type="text" id="excluded-dates" readonly>
+                    <input type="text" id="excluded-dates" readonly placeholder="Choose excluded dates">
                     <input type="date" id="add-excluded-date" onchange="addExcludedDate()" disabled>
                 </div>
                 <div class="phone">
                     <label>No. of Days:</label>
-                    <input type="text" class="days-input" onclick="fillDaysInput(this)" readonly>
+                    <input type="text" class="days-input" onclick="fillDaysInput(this)" readonly placeholder="Total working days">
                 </div>
             </div>
             <div class="third input">
