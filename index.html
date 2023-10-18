@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="phone.css">
 </head>
+
 <body>
     <div class="container">
         <h1 class="heading">DRR Report</h1>
@@ -57,6 +59,7 @@
             <table>
                 <thead>
                     <tr class="head-row">
+                        <th>Action</th>
                         <th>Id</th>
                         <th>Start Date</th>
                         <th>End Date</th>
@@ -74,7 +77,20 @@
         </div>
     </div>
 
+    <div class="storage">
+        <button id="clear-local-storage">Clear Local Storage</button>
+    </div>
+
+    <script>
+        document.getElementById("clear-local-storage").addEventListener("click", function () {
+            localStorage.clear();
+            alert("Local storage has been cleared.");
+        });
+    </script>
+
+
     <script src="script.js"></script>
+    <script src="saveData.js"></script>
 </body>
 
 </html>

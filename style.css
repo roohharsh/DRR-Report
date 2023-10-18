@@ -10,7 +10,7 @@ body {
 }
 
 .inputs {
-    width: 70%;
+    width: 86%;
     margin: 20px auto;
     padding: 30px;
     background-color: #ededf066;
@@ -80,4 +80,16 @@ tr{
 
 tr:nth-child(even) {
     background-color: #E7E9EB;
+}
+
+.storage button{
+    width: auto;
+    padding: 14px;
+}
+
+.storage{
+    display: flex;
+    justify-content: end;
+    width: 90%;
+    margin: 20px auto;
 }
