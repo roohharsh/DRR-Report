@@ -78,6 +78,10 @@ button:hover {
     font-size: 1.1rem;
 }
 
+.drr-table button:hover{
+    scale: 1.1;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -91,6 +95,10 @@ th, td {
 
 tr{
     border-bottom: 1px solid #ddd;
+}
+
+.edit-delete-column{
+    display: flex;
 }
 
 tr:nth-child(even) {

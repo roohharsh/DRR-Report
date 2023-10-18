@@ -10,6 +10,14 @@ function saveData() {
     const table = document.querySelector("table tbody");
     const newRow = document.createElement("tr");
 
+    // Add an 'Edit' button
+    const editButton = document.createElement("button");
+    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+    editButton.addEventListener("click", function () {
+        editRow(this);
+    });
+
+    // Add an 'Delete' button
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.addEventListener("click", function () {
@@ -17,7 +25,9 @@ function saveData() {
     });
 
     const actionCell = document.createElement("td");
-    actionCell.appendChild(deleteButton);
+    actionCell.classList.add("edit-delete-column");
+    actionCell.appendChild(editButton);  // Add the 'Edit' button
+    actionCell.appendChild(deleteButton); // Add the 'Delete' button
     newRow.appendChild(actionCell);
 
     // Add an 'Id' cell with the current ID
@@ -64,6 +74,22 @@ function saveData() {
     saveDataToLocalStorage();
 }
 
+// Function to edit an existing row
+function editRow(button) {
+    const row = button.parentNode.parentNode;
+    const cells = row.querySelectorAll("td");
+
+    // Skip the 'Action' and 'Id' cells, which are not editable
+    for (let i = 2; i < cells.length - 1; i++) {
+        const input = document.querySelectorAll("input")[i - 2]; // -2 to adjust for the 'Action' and 'Id' cells
+        input.value = cells[i].textContent;
+    }
+
+    // Remove the current row from the table and save the updated data
+    row.parentNode.removeChild(row);
+    saveDataToLocalStorage();
+}
+
 // Function to delete a row
 function deleteRow(button) {
     const row = button.parentNode.parentNode;
@@ -72,6 +98,13 @@ function deleteRow(button) {
     // Save the table data to localStorage after deleting a row
     saveDataToLocalStorage();
 }
+
+// Add event listeners for 'Edit' buttons
+document.querySelectorAll("table tbody tr button:first-child").forEach((button) => {
+    button.addEventListener("click", function () {
+        editRow(this);
+    });
+});
 
 // Function to save the table data to localStorage
 function saveDataToLocalStorage() {
@@ -102,7 +135,6 @@ function cancel() {
     })
 }
 
-// Function to load saved data from localStorage and populate the table
 function loadSavedData() {
     const table = document.querySelector("table tbody");
     const savedData = JSON.parse(localStorage.getItem("tableData"));
@@ -112,7 +144,13 @@ function loadSavedData() {
             const newRow = document.createElement("tr");
             rowData.forEach((cellData, index) => {
                 const cell = document.createElement("td");
-                if (index === 0) { // Check if it's the first cell (Delete button)
+                if (index === 0) {
+                    const editButton = document.createElement("button");
+                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    editButton.addEventListener("click", function () {
+                        editRow(this);
+                    });
+                    cell.appendChild(editButton);
                     const deleteButton = document.createElement("button");
                     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
                     deleteButton.addEventListener("click", function () {
@@ -128,6 +166,7 @@ function loadSavedData() {
         });
     }
 }
+
 
 // Call the function to load saved data when the page loads
 window.addEventListener("load", loadSavedData);

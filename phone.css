@@ -10,15 +10,16 @@
     }
 
     .inputs{
-        width: 88%;
+        width: 90%;
         padding: 15px;
     }
 
     input{
-        width: 140px;
-        padding: 2px;
+        width: 150px;
+        padding: 3px;
         margin-left: 5px;
         font-size: 0.9rem;
+        margin-right: 0;
     }
 
     .phone{
