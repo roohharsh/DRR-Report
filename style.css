@@ -30,6 +30,15 @@ input {
     padding: 2px;
 }
 
+#excluded-dates{
+    margin-right: 5px;
+}
+
+#add-excluded-date{
+    margin-left: 0;
+    width: 23px;
+}
+
 .fourth {
     margin-bottom: 10px;
 }

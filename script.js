@@ -21,30 +21,17 @@ function fillMonthYear(element) {
     element.value = `${month}/${year}`;
 }
 
-// Function to add event listener for excluded date input
-document.getElementById("excluded-date").addEventListener("change", function() {
-    const startDate = new Date(document.getElementById("start-date").value);
-    const endDate = new Date(document.getElementById("end-date").value);
-    const excludedDate = new Date(this.value);
 
-    if (excludedDate < startDate || excludedDate > endDate) {
-        alert("Excluded date must be between the start and end dates.");
-        this.value = ""; // Clear the input field
-    } else {
-        fillDaysInput(document.querySelector(".days-input"));
-    }
-});
-
-// Function to enable "Excluded Dates" input when "Start Date" and "End Date" are selected
+// Function to enable "Add Excluded Date" input when "Start Date" and "End Date" are selected
 function enableExcludedDateInput() {
     const startDateInput = document.getElementById("start-date");
     const endDateInput = document.getElementById("end-date");
-    const excludedDateInput = document.getElementById("excluded-date");
+    const addExcludedDateInput = document.getElementById("add-excluded-date");
 
     if (startDateInput.value && endDateInput.value) {
-        excludedDateInput.disabled = false;
+        addExcludedDateInput.disabled = false;
     } else {
-        excludedDateInput.disabled = true;
+        addExcludedDateInput.disabled = true;
     }
 }
 
@@ -52,24 +39,58 @@ function enableExcludedDateInput() {
 document.getElementById("start-date").addEventListener("change", enableExcludedDateInput);
 document.getElementById("end-date").addEventListener("change", enableExcludedDateInput);
 
+// Function to add excluded date from date input to the text input
+function addExcludedDate() {
+    const startDate = new Date(document.getElementById("start-date").value);
+    const endDate = new Date(document.getElementById("end-date").value);
+    const addExcludedDateInput = document.getElementById("add-excluded-date");
+    const excludedDatesInput = document.getElementById("excluded-dates");
+    const selectedDate = new Date(addExcludedDateInput.value);
+
+    // Ensure the date is not empty and is a valid date
+    if (!isNaN(selectedDate)) {
+        if (selectedDate >= startDate && selectedDate <= endDate) {
+            if (excludedDatesInput.value === "") {
+                excludedDatesInput.value = selectedDate.toISOString().split('T')[0];
+            } else {
+                // Append the selected date to the existing list
+                excludedDatesInput.value += `, ${selectedDate.toISOString().split('T')[0]}`;
+            }
+
+            // Clear the date input after adding the date
+            addExcludedDateInput.value = "";
+        } else {
+            alert("Excluded date must be between the start and end dates.");
+            addExcludedDateInput.value = ""; // Clear the input field
+        }
+    } else {
+        alert("Please select a valid date.");
+        addExcludedDateInput.value = ""; // Clear the input field
+    }
+}
+
+// Function to count the total number of excluded dates
+function countExcludedDates() {
+    const excludedDatesInput = document.getElementById("excluded-dates");
+    const excludedDates = excludedDatesInput.value.split(",");
+    return excludedDates.length;
+}
+
 
 // Function to calculate the total number of days
 function fillDaysInput(element) {
     const startDate = new Date(document.getElementById("start-date").value);
     const endDate = new Date(document.getElementById("end-date").value);
-    const excludedDate = new Date(document.getElementById("excluded-date").value);
 
     let timeDiff = endDate - startDate;
     let daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Milliseconds to days
 
     if (!isNaN(daysDiff) && daysDiff > 0) {
         // Check if the input is valid and there are positive days
-        if (!isNaN(excludedDate)) {
-            const excludedTime = excludedDate - startDate;
-            const excludedDays = Math.floor(excludedTime / (1000 * 60 * 60 * 24));
-            daysDiff = daysDiff - 1;
+        if (!isNaN(countExcludedDates())) {
+            daysDiff = daysDiff - countExcludedDates();
         }
-        element.value = daysDiff;
+        element.value = daysDiff + 1;
     } else {
         element.value = '';
     }

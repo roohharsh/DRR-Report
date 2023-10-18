@@ -33,7 +33,7 @@ function saveData() {
     
     let cellIndex = 1; // Start at 1 to account for the 'Id' cell
     for (const input of inputs) {
-        if (input.type !== "button") { // Skip buttons
+        if (input.type !== "button" && input.id !== "add-excluded-date") { // Skip buttons and add-excluded-date input
             const cell = document.createElement("td");
             cell.textContent = input.value;
             newRow.appendChild(cell);
