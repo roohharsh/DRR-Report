@@ -69,10 +69,6 @@ function deleteRow(button) {
     const row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
 
-    // Update the currentId and save it to localStorage
-    currentId--;
-    localStorage.setItem("currentId", currentId);
-
     // Save the table data to localStorage after deleting a row
     saveDataToLocalStorage();
 }

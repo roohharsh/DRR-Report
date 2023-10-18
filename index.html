@@ -19,16 +19,16 @@
             <div class="first input">
                 <div class="phone">
                     <label>Start Date:</label>
-                    <input type="date" id="start-date">
+                    <input type="date" id="start-date" required>
                 </div>
                 <div class="phone">
                     <label>End Date:</label>
-                    <input type="date" id="end-date" onchange="validateEndDate()">
+                    <input type="date" id="end-date" onchange="validateEndDate()" required>
                 </div>
                 <div class="phone">
                     <label>Month/Year:</label>
                     <input type="text" class="month-input" onclick="fillMonthYear(this)" readonly
-                        placeholder="Click here">
+                        placeholder="Click here" required>
                 </div>
             </div>
             <div class="second input">
@@ -39,18 +39,18 @@
                 </div>
                 <div class="phone">
                     <label>No. of Days:</label>
-                    <input type="text" class="days-input" onclick="fillDaysInput(this)" readonly placeholder="Total working days">
+                    <input type="text" class="days-input" onclick="fillDaysInput(this)" readonly placeholder="Total working days" required>
                 </div>
             </div>
             <div class="third input">
                 <div class="phone">
                     <label>Lead Count:</label>
-                    <input type="number" id="lead-count" placeholder="Enter lead count value">
+                    <input type="number" id="lead-count" placeholder="Enter lead count value" required>
                 </div>
                 <div class="phone">
                     <label>Expected Count:</label>
                     <input type="text" class="expected-lead-count-input" onclick="fillExpectedLeadCountInput(this)"
-                        readonly placeholder="Click here">
+                        readonly placeholder="Click here" required>
                 </div>
             </div>
             <div class="fourth input">

@@ -72,8 +72,13 @@ function addExcludedDate() {
 // Function to count the total number of excluded dates
 function countExcludedDates() {
     const excludedDatesInput = document.getElementById("excluded-dates");
-    const excludedDates = excludedDatesInput.value.split(",");
-    return excludedDates.length;
+    const excludedDatesValue = excludedDatesInput.value.trim(); // Remove leading/trailing spaces
+    if (excludedDatesValue === "") {
+        return 0; // Return 0 if the input is empty
+    } else {
+        const excludedDates = excludedDatesValue.split(",");
+        return excludedDates.length;
+    }
 }
 
 
@@ -84,13 +89,11 @@ function fillDaysInput(element) {
 
     let timeDiff = endDate - startDate;
     let daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Milliseconds to days
+    daysDiff = daysDiff + 1;
 
-    if (!isNaN(daysDiff) && daysDiff > 0) {
-        // Check if the input is valid and there are positive days
-        if (!isNaN(countExcludedDates())) {
-            daysDiff = daysDiff - countExcludedDates();
-        }
-        element.value = daysDiff + 1;
+    if (!isNaN(daysDiff) && daysDiff >= 0) {
+        daysDiff = daysDiff - countExcludedDates();
+        element.value = daysDiff;
     } else {
         element.value = '';
     }

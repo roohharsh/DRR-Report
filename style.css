@@ -74,7 +74,7 @@ button:hover {
 
 .drr-table button{
     width: auto;
-    background-color: white;
+    background: none;
     font-size: 1.1rem;
 }
 
